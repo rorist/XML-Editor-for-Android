@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <Button
+        android:id="@+id/btn_0"
+        android:layout_width="100dip" 
+        android:layout_height="wrap_content" 
+        android:text="Open Demo File" />
+
+    <Button
+        android:id="@+id/btn_1"
+        android:layout_width="100dip" 
+        android:layout_height="wrap_content" 
+        android:text="Browser SD Card" />
+    
+    <Button
+        android:id="@+id/btn_2"
+        android:layout_width="100dip" 
+        android:layout_height="wrap_content" 
+        android:text="New file" />
+    
+    <Button
+        android:id="@+id/btn_3"
+        android:layout_width="100dip" 
+        android:layout_height="wrap_content" 
+        android:text="Quit" />
+    
+</LinearLayout>

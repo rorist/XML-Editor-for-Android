@@ -18,5 +18,7 @@ public class Main extends Activity {
                 startActivity(new Intent(getApplicationContext(), XmlEditor.class));
             }
         });
+        
+        startActivity(new Intent(getApplicationContext(), XmlEditor.class));
     }
 }

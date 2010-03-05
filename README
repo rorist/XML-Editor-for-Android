@@ -1,0 +1,54 @@
+<root>
+    <child1>
+        <child2/>
+    </child1>
+    <child3/>
+</root>
+
+
+ 1. currentNode = null
+    rootNode = null
+    parentNode = null
+
+ 2. currentNode = new Node('root')
+    rootNode = currentNode
+    parentNode = null
+ 
+ 3. currentNode = new Node('child1')
+    parentNode = root
+ 
+ 4. currentNode = new Node('child2')
+    parentNode = child1
+ 
+ 5. close child2
+    currentNode = child1
+    parentNode = root
+
+ 6. close child1
+    currentNode = root
+    parentNode = null
+
+ 7. currentNode = new Node('child3')
+    parentNode = root
+
+ 8. close child3
+    currentNode = root
+    parentNode = null
+
+ 9. close root
+    currentNode = null
+    parentNode = null
+
+
+
+    Sooooo
+
+ 1. parentNode = currentNode.parentNode (parentNode is local!!)
+ 2. create currentNode
+ 1. set currentNode.parentNode from local parentNode
+ 3. add to parent
+ 4. set attrs
+ 5. set childs
+ 6. close
+ 7. set currentNode from currentNode.parentNode
+

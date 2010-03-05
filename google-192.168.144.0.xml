@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NetworkDiscovery>
+	<info>
+		<date>2010-02-12T12:31:21+0100</date>
+		<network>192.168.144.0 23</network>
+		<ssid>GoogleGuest</ssid>
+		<bssid>00:1a:1e:5d:fb:c0</bssid>
+		<ip>192.168.145.149</ip>
+	</info>
+	<hosts>
+		<host value="192.168.145.146" mac="00:23:76:8d:3f:a3">
+		</host>
+		<host value="192.168.145.174" mac="00:21:fe:5f:96:c6">
+		</host>
+		<host value="192.168.145.121" mac="00:1b:63:09:60:35">
+		</host>
+		<host value="192.168.145.124" mac="00:23:76:8d:3a:26">
+		</host>
+		<host value="192.168.145.123" mac="00:26:08:5d:70:1f">
+		</host>
+		<host value="192.168.145.189" mac="00:23:76:8d:43:3f">
+		</host>
+		<host value="192.168.145.203" mac="1c:4b:d6:39:1b:17">
+		</host>
+		<host value="192.168.145.86" mac="00:23:76:8d:42:1a">
+		</host>
+		<host value="192.168.145.68" mac="00:23:76:8d:41:ed">
+		</host>
+		<host value="192.168.145.69" mac="00:23:76:ae:d8:4f">
+		</host>
+		<host value="192.168.145.229" mac="00:21:6a:85:32:48">
+		</host>
+		<host value="192.168.145.51" mac="00:23:76:8d:3f:ff">
+		</host>
+		<host value="192.168.145.49" mac="00:23:76:b2:36:d1">
+		</host>
+		<host value="192.168.145.46" mac="00:1b:63:c4:6b:fb">
+		</host>
+		<host value="192.168.145.44" mac="00:23:76:8d:3f:9f">
+		</host>
+		<host value="192.168.145.3" mac="00:23:76:8d:41:95">
+		</host>
+		<host value="192.168.144.234" mac="00:23:76:8d:3e:a6">
+		</host>
+		<host value="192.168.144.202" mac="00:23:76:8c:4f:82">
+		</host>
+		<host value="192.168.144.201" mac="00:23:76:94:bd:f4">
+		</host>
+		<host value="192.168.144.168" mac="00:23:76:8d:40:60">
+		</host>
+		<host value="192.168.144.158" mac="00:23:76:8d:3a:3a">
+		</host>
+		<host value="192.168.144.138" mac="00:23:76:8d:3f:bb">
+		</host>
+		<host value="192.168.144.45" mac="00:23:76:b2:2d:b6">
+		</host>
+		<host value="192.168.144.25" mac="00:1f:f3:d9:08:e9">
+		</host>
+		<host value="192.168.144.23" mac="00:23:76:8d:41:21">
+		</host>
+	</hosts>
+</NetworkDiscovery>

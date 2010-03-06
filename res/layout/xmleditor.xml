@@ -4,4 +4,36 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
         
+    <TextView
+        style="@style/Title"
+        android:text="Node:" />
+        
+     <LinearLayout
+        android:id="@+id/node_info"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dip" />
+    
+    <TextView
+        style="@style/Title"
+        android:text="Attributes:" />
+        
+     <LinearLayout
+        android:id="@+id/node_attrs"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dip">
+    </LinearLayout>
+    
+    <TextView
+        style="@style/Title"
+        android:text="Childs:" />
+    
+    <ListView
+        android:id="@+id/list_childs"
+        android:layout_width="fill_parent" 
+        android:layout_height="0dip"
+        android:layout_weight="1" />    
 </LinearLayout>

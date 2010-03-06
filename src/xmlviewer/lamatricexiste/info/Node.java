@@ -7,7 +7,7 @@ public class Node {
 
     public String schema;
     public String name;
-    public String content;
+    public String content = null;
     public Node parentNode = null;
     public HashMap<String, String> attrs = new HashMap<String, String>();
     public ArrayList<Node> childs = new ArrayList<Node>();

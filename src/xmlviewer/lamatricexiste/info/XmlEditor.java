@@ -20,20 +20,55 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class XmlEditor extends Activity {
 
     private final String TAG = "XmlEditor";
     private Node rootNode = null;
+    private LayoutInflater mInflater;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mInflater = LayoutInflater.from(getApplicationContext());
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.xmleditor);
         editRootNode();
+    }
+
+    private void displayNode(Node node) {
+        // Node information
+        LinearLayout layout = (LinearLayout) findViewById(R.id.node_info);
+        layout.addView(createInfoTextView("Name", node.name));
+        if (node.content != null) {
+            layout.addView(createInfoTextView("Content", node.content));
+        }
+
+        // Childs list
+        ArrayAdapter<String> childs = new ArrayAdapter<String>(getApplicationContext(),
+                R.layout.list_nodes, R.id.list);
+        ListView list_childs = (ListView) findViewById(R.id.list_childs);
+        list_childs.setAdapter(childs);
+        for (int i = 0; i < node.childs.size(); i++) {
+            childs.add(node.childs.get(i).name);
+        }
+    }
+
+    private LinearLayout createInfoTextView(String label_str, String value_str) {
+        LinearLayout layout = (LinearLayout) mInflater.inflate(R.layout.list_info, null);
+        TextView label = (TextView) layout.findViewById(R.id.label);
+        TextView value = (TextView) layout.findViewById(R.id.value);
+        label.setText(label_str+":");
+        value.setText(value_str);
+        return layout;
     }
 
     private void editRootNode() {
@@ -47,20 +82,9 @@ public class XmlEditor extends Activity {
             e.printStackTrace();
         } finally {
             if (rootNode != null) {
-                Log.i(TAG, "rootNode=" + rootNode.childs.size());
-
-                // Build Nodes List
-                NodesList nodesList = new NodesList();
-                nodesList.add(rootNode); // rootNode is the 1st to be added
-                nodesList.addAll(rootNode.childs);
-
-                // Start new Activity
-                Bundle b = new Bundle();
-                b.putParcelable("nodes", nodesList);
-                Intent i = new Intent(getApplicationContext(), NodeViewer.class);
-                i.putExtras(b);
-
-                startActivity(i);
+                displayNode(rootNode);
+            } else {
+                Log.e(TAG, "rootNode does not exist!");
             }
         }
     }

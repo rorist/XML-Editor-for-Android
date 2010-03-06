@@ -43,15 +43,18 @@ public class XmlHandler extends DefaultHandler {
         if (rootNode == null) {
             rootNode = new Node();
             currentNode = rootNode;
+            currentNode.name = name;
         } else {
             if (currentNode != null) {
                 parentNode = currentNode;
             }
             currentNode = new Node();
+            currentNode.name = name;
             currentNode.parentNode = parentNode;
+            // rootNode.childs.add(currentNode); // Add all nodes to rootNode
         }
-        currentNode.name = name;
 
+        // Add to hierarchy
         if (parentNode != null) {
             parentNode.childs.add(currentNode);
         }

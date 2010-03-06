@@ -20,6 +20,10 @@
         <activity
             android:name=".XmlEditor"
             android:label="@string/app_name" />
+            
+        <activity
+            android:name=".NodeViewer"
+            android:label="@string/app_name" />
 
     </application>
     

@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class XmlHandler extends DefaultHandler {
     private final String TAG = "XmlHandler";
-    private final boolean LOG_INFO = true;
+    private final boolean LOG_INFO = false;
     private Node rootNode = null;
     private Node currentNode = null;
 
@@ -81,12 +81,13 @@ public class XmlHandler extends DefaultHandler {
         String chars = "";
         int size = start + length;
         for (int i = start; i < size; i++) {
+            // Log.v(TAG, "CHAR=" + ch[i]);
             switch (ch[i]) {
                 case '\\':
-                    // chars += "\\\\";
+                    chars += "\\\\";
                     break;
                 case '"':
-                    // chars += "\\\"";
+                    chars += "\\\"";
                     break;
                 case '\n':
                     // chars += "\\n";
@@ -96,6 +97,15 @@ public class XmlHandler extends DefaultHandler {
                     break;
                 case '\t':
                     // chars += "\\t";
+                    break;
+                case '<':
+                    chars += "&lt;";
+                    break;
+                case '>':
+                    chars += "&gt;";
+                    break;
+                case '&':
+                    chars += "&amp;";
                     break;
                 default:
                     chars += "" + ch[i];

@@ -19,7 +19,8 @@ public class Main extends Activity {
                 openFile("/sdcard/discovery/google-192.168.144.0.xml");
             }
         });
-        openFile("/sdcard/test.html");
+        // openFile("/sdcard/test.html");
+        openFile("/sdcard/nmap.xml");
     }
 
     private void openFile(String filename) {

@@ -19,26 +19,11 @@
             android:layout_width="60dip"
             android:layout_height="wrap_content"
             android:text="Up" />
-        <Button
-            android:id="@+id/btn_prev"
-            android:layout_width="60dip"
-            android:layout_height="wrap_content"
-            android:text="&lt;" />
-        <Button
-            android:id="@+id/btn_next"
-            android:layout_width="60dip"
-            android:layout_height="wrap_content"
-            android:text="&gt;" />
-        <Button
-            android:id="@+id/btn_quit"
-            android:layout_width="60dip"
-            android:layout_height="wrap_content"
-            android:text="Quit" />
     </LinearLayout>
         
     <TextView
-        style="@style/Title"
-        android:text="Node:" />
+        android:text="Node:"
+        style="@style/Title" />
         
      <LinearLayout
         android:id="@+id/node_info"
@@ -49,20 +34,20 @@
     
     <TextView
         android:id="@+id/title_attrs"
-        style="@style/Title"
-        android:text="Attributes:" />
+        android:text="Attributes:"
+        style="@style/Title" />
         
      <LinearLayout
         android:id="@+id/node_attrs"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        style="Box">
-    </LinearLayout>
+        android:orientation="vertical"
+        style="Box" />
     
     <TextView
         android:id="@+id/title_childs"
-        style="@style/Title"
-        android:text="Childs:" />
+        android:text="Childs:"
+        style="@style/Title" />
     
     <ListView
         android:id="@+id/childs"

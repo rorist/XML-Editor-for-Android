@@ -1,4 +1,4 @@
-package xmlviewer.lamatricexiste.info;
+package info.lamatricexiste.xmlviewer;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;

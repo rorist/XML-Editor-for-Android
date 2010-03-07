@@ -1,4 +1,4 @@
-package xmlviewer.lamatricexiste.info;
+package info.lamatricexiste.xmlviewer;
 
 import android.app.Activity;
 import android.content.Intent;

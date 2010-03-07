@@ -1,4 +1,4 @@
-package xmlviewer.lamatricexiste.info;
+package info.lamatricexiste.xmlviewer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

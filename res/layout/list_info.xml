@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TableRow        
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-        
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dip"
+        android:textSize="16dip"
+        android:text="Label" />
+    <EditText
+        android:id="@+id/value"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="16dip"
-        android:text="Label:" />
-        
-    <TextView
-        android:id="@+id/value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16dip"
-        android:text="value" />
-    
-</LinearLayout>
+        android:text="value"
+        android:maxLines="2"
+        android:fadingEdge="horizontal" />
+</TableRow>

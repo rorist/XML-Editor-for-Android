@@ -1,6 +1,7 @@
 package info.lamatricexiste.xmlviewer;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +14,8 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Button btn_0 = (Button) findViewById(R.id.btn_0);
-        btn_0.setOnClickListener(new View.OnClickListener() {
+        Button btn_open = (Button) findViewById(R.id.btn_open);
+        btn_open.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 openFile("/sdcard/discovery/google-192.168.144.0.xml");
             }
@@ -25,13 +26,19 @@ public class Main extends Activity {
 
     private void openFile(String filename) {
         Uri uri = Uri.parse(filename);
-        // ContentResolver cr = getContentResolver();
-        // MimeTypeMap mime = MimeTypeMap.getSingleton();
-        // Log.v("XMLEDITOR", "MIME=" + cr.getType(uri));
 
+        // Try to define Mime Type
+        // MimeTypeMap mime = MimeTypeMap.getSingleton();
+        ContentResolver cr = getContentResolver();
+        String type = cr.getType(uri);
+        if (type == null) {
+            type = "text/plain";
+        }
+
+        // Create intent and start Activity
         Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(uri, "text/xml");
+        intent.setDataAndType(uri, type);
         startActivity(intent);
     }
 }

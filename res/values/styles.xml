@@ -12,5 +12,8 @@
     <style name="Box">
         <item name="android:paddingLeft">15dip</item>
         <item name="android:paddingRight">15dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
     </style>
 </resources>

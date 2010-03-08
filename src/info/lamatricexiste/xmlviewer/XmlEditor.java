@@ -21,6 +21,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import org.xmlpull.v1.XmlPullParser;
+import android.util.AttributeSet;
+import android.util.Xml;
+
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +37,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -45,20 +50,22 @@ public class XmlEditor extends Activity {
     private LayoutInflater mInflater;
     private File file = null;
     private ArrayAdapter<String> childs;
+    private LinearLayout mainView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mInflater = LayoutInflater.from(getApplicationContext());
-        childs = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_nodes, R.id.list);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.xmleditor);
+        mainView = (LinearLayout) findViewById(R.id.main_view);
+        childs = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_nodes, R.id.list);
 
         // Get Intent data
         Uri uri = getIntent().getData();
         file = new File(uri.getPath());
         if (file.exists()) {
-            parseXmlAndeditRootNode();
+            parseXmlAndEditRootNode();
         } else {
             Toast.makeText(getApplicationContext(),
                     "File: " + file.getName() + ": Does not exist!", Toast.LENGTH_LONG).show();
@@ -82,44 +89,59 @@ public class XmlEditor extends Activity {
         });
     }
 
-    // FIXME: node is not editable with final
+    private TextView createTitle(String value){
+        TextView title = new TextView(getApplicationContext(), null, R.style.Title);
+        title.setText(value);
+        return title;
+    }
+
+    private TableLayout createContainer(){
+        XmlPullParser parser = getResources().getXml(R.style.Box);
+        AttributeSet attrs = Xml.asAttributeSet(parser);
+        TableLayout container = new TableLayout(getApplicationContext(), attrs);
+        return container;
+    }
+
     private void displayNode(final Node node) {
         currentNode = node;
-        LinearLayout layout_info = (LinearLayout) findViewById(R.id.node_info);
-        LinearLayout layout_attrs = (LinearLayout) findViewById(R.id.node_attrs);
 
         // Reset views
-        layout_info.removeAllViews();
-        layout_attrs.removeAllViews();
-        childs.clear();
+        mainView.removeAllViews();
 
         // Node information
-        layout_info.addView(createInfoTextView("Name:", node.name));
+        createTitle("Node:");
+        TableLayout layout_info = createContainer();
+        layout_info.addView(createInfoTextView("Name", node.name));
         if (node.content != null) {
-            layout_info.addView(createInfoTextView("Content:", node.content));
+            layout_info.addView(createInfoTextView("Content", node.content));
         }
+        mainView.addView(layout_info);
 
         // Attributes
         if (node.attrs.size() > 0) {
+            TableLayout layout_attrs = createContainer();
             for (Map.Entry<String, String> entry : node.attrs.entrySet()) {
-                layout_attrs.addView(createInfoTextView(entry.getKey() + ":", entry.getValue()));
+                layout_attrs.addView(createInfoTextView(entry.getKey(), entry.getValue()));
             }
+            mainView.addView(layout_attrs);
         }
 
         // Childs list
         if (node.childs.size() > 0) {
-            ListView list_childs = (ListView) findViewById(R.id.childs);
-            list_childs.setAdapter(childs);
+            TableLayout layout_childs = createContainer();
+            /*
             list_childs.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> av, View v, int index, long arg) {
                     displayNode(node.childs.get(index));
                 }
             });
+            */
             int size = node.childs.size();
             for (int i = 0; i < size; i++) {
-                childs.add(node.childs.get(i).name);
+                layout_childs.addView(createInfoTextView(node.childs.get(i).name, ""));
             }
+            mainView.addView(layout_childs);
         }
     }
 
@@ -132,7 +154,7 @@ public class XmlEditor extends Activity {
         return layout;
     }
 
-    private void parseXmlAndeditRootNode() {
+    private void parseXmlAndEditRootNode() {
         try {
             rootNode = parseXml();
         } catch (SAXException e) {

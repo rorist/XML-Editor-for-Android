@@ -5,25 +5,25 @@
     android:layout_height="fill_parent">
     
     <Button
-        android:id="@+id/btn_0"
+        android:id="@+id/btn_open"
         android:layout_width="100dip" 
         android:layout_height="wrap_content" 
         android:text="Open Demo File" />
 
     <Button
-        android:id="@+id/btn_1"
+        android:id="@+id/btn_browse"
         android:layout_width="100dip" 
         android:layout_height="wrap_content" 
         android:text="Browser SD Card" />
     
     <Button
-        android:id="@+id/btn_2"
+        android:id="@+id/btn_new"
         android:layout_width="100dip" 
         android:layout_height="wrap_content" 
         android:text="New file" />
     
     <Button
-        android:id="@+id/btn_3"
+        android:id="@+id/btn_quit"
         android:layout_width="100dip" 
         android:layout_height="wrap_content" 
         android:text="Quit" />

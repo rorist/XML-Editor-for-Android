@@ -127,14 +127,6 @@ public class XmlEditor extends Activity {
         if (node.childs.size() > 0) {
             mainView.addView(createTitle("Childs:"));
             TableLayout layout_childs = createContainer();
-            /*
-            list_childs.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> av, View v, int index, long arg) {
-                    displayNode(node.childs.get(index));
-                }
-            });
-            */
             int size = node.childs.size();
             for (int i = 0; i < size; i++) {
                 layout_childs.addView(createNodeTextView(node.childs.get(i).name, i));
@@ -152,11 +144,15 @@ public class XmlEditor extends Activity {
         return layout;
     }
 
-    private LinearLayout createNodeTextView(String str, int position) {
+    private LinearLayout createNodeTextView(String str, final int position) {
         LinearLayout layout = (LinearLayout) mInflater.inflate(R.layout.list_nodes, null);
         TextView value = (TextView) layout.findViewById(R.id.name);
         value.setText(str);
-        //TODO: Add action listener + different color when selected
+        layout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                displayNode(currentNode.childs.get(position));
+            }
+        });
         return layout;
     }
 

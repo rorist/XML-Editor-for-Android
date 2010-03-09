@@ -85,6 +85,22 @@ public class XmlEditor extends Activity {
                 }
             }
         });
+        Button btn_prev = (Button) findViewById(R.id.btn_prev);
+        btn_prev.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(currentNode.parentNode!=null && currentNode.position > 0){
+                    displayNode(currentNode.parentNode.childs.get(currentNode.position - 1));
+                }
+            }
+        });
+        Button btn_next = (Button) findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(currentNode.parentNode!=null && currentNode.position < currentNode.parentNode.childs.size() - 1){
+                    displayNode(currentNode.parentNode.childs.get(currentNode.position + 1));
+                }
+            }
+        });
     }
 
     private TextView createTitle(String value){
@@ -137,17 +153,14 @@ public class XmlEditor extends Activity {
 
     private LinearLayout createInfoTextView(String label_str, String value_str) {
         LinearLayout layout = (LinearLayout) mInflater.inflate(R.layout.list_info, null);
-        TextView label = (TextView) layout.findViewById(R.id.label);
-        TextView value = (TextView) layout.findViewById(R.id.value);
-        label.setText(label_str);
-        value.setText(value_str);
+        ((TextView) layout.findViewById(R.id.label)).setText(label_str);
+        ((TextView) layout.findViewById(R.id.value)).setText(value_str);
         return layout;
     }
 
     private LinearLayout createNodeTextView(String str, final int position) {
         LinearLayout layout = (LinearLayout) mInflater.inflate(R.layout.list_nodes, null);
-        TextView value = (TextView) layout.findViewById(R.id.name);
-        value.setText(str);
+        ((TextView) layout.findViewById(R.id.name)).setText(str);
         layout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 displayNode(currentNode.childs.get(position));
@@ -179,8 +192,7 @@ public class XmlEditor extends Activity {
         }
     }
 
-    private Node parseXml() throws SAXException, ParserConfigurationException, IOException,
-            ParseException {
+    private Node parseXml() throws SAXException, ParserConfigurationException, IOException, ParseException {
         SAXParserFactory spf = SAXParserFactory.newInstance();
         SAXParser sp = spf.newSAXParser();
         XMLReader xr = sp.getXMLReader();

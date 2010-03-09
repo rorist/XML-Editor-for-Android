@@ -57,6 +57,7 @@ public class XmlHandler extends DefaultHandler {
         // Add to hierarchy
         if (parentNode != null) {
             parentNode.childs.add(currentNode);
+            currentNode.position = parentNode.childs.indexOf(currentNode);
         }
 
         // Attributes

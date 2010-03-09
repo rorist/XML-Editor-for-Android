@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 public class Node {
 
+    public int position;
     public String schema;
     public String name;
     public String content = null;

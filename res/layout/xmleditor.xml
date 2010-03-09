@@ -19,6 +19,16 @@
                 android:layout_width="70dip"
                 android:layout_height="wrap_content"
                 android:text="Root" />
+            <Button
+                android:id="@+id/btn_prev"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:text="Previous" />
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:text="Next" />
         </LinearLayout>
 
         <ScrollView

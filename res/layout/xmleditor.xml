@@ -10,15 +10,15 @@
             android:layout_height="wrap_content"
             android:padding="5dip">
             <Button
-                android:id="@+id/btn_up"
-                android:layout_width="70dip"
-                android:layout_height="wrap_content"
-                android:text="Up" />
-            <Button
                 android:id="@+id/btn_root"
                 android:layout_width="70dip"
                 android:layout_height="wrap_content"
                 android:text="Root" />
+            <Button
+                android:id="@+id/btn_up"
+                android:layout_width="70dip"
+                android:layout_height="wrap_content"
+                android:text="Up" />
             <Button
                 android:id="@+id/btn_prev"
                 android:layout_width="80dip"

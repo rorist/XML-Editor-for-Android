@@ -16,7 +16,7 @@ public class Main extends Activity {
     public static final String ACTION_PICK_FILE = "org.openintents.action.PICK_FILE";
     public static final String EXTRA_TITLE = "org.openintents.extra.TITLE";
     public static final String EXTRA_BUTTON_TEXT = "org.openintents.extra.BUTTON_TEXT";
-    private final int RESULT_PICK_FILE = 1;
+    private final static int RESULT_PICK_FILE = 1;
     private final String TAG = "XmlViewer-Main";
 
     @Override
@@ -28,7 +28,6 @@ public class Main extends Activity {
         Button btn_open = (Button) findViewById(R.id.btn_open);
         btn_open.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //openFile("/sdcard/discovery/google-192.168.144.0.xml");
                 openFile("/sdcard/nmap.xml");
             }
         });
@@ -93,15 +92,14 @@ public class Main extends Activity {
         Intent intent = null;
         try {
             intent = new Intent(Main.ACTION_PICK_FILE);
-            //intent.setData(Uri.parse("/sdcard"));
-            intent.putExtra(Main.EXTRA_TITLE, "Select file to open");
+            intent.putExtra(Main.EXTRA_TITLE, "Select File");
             intent.putExtra(Main.EXTRA_BUTTON_TEXT, "Open");
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, Main.RESULT_PICK_FILE);
         } catch (ActivityNotFoundException e){
             Log.e(TAG, e.getMessage());
             Toast.makeText(this, "Please install OI File Manager.", Toast.LENGTH_LONG).show();
             intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://search?q=pname:org.openintents.filemanager"));
+            intent.setData(Uri.parse("market://search?q=filemanager openintents")); //pname:org.openintents.filemanager
             startActivity(intent);
         }
     }

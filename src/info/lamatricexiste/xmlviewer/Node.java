@@ -7,6 +7,7 @@ public class Node {
 
     public int position;
     public String schema;
+    public String uri;
     public String name;
     public String content = null;
     public Node parentNode = null;

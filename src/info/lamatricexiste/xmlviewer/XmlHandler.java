@@ -2,6 +2,8 @@ package info.lamatricexiste.xmlviewer;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.SAXException;
 
 import android.util.Log;
 
@@ -49,6 +51,7 @@ public class XmlHandler extends DefaultHandler {
                 parentNode = currentNode;
             }
             currentNode = new Node();
+            currentNode.uri = uri;
             currentNode.name = name;
             currentNode.parentNode = parentNode;
             // rootNode.childs.add(currentNode); // Add all nodes to rootNode
@@ -78,11 +81,11 @@ public class XmlHandler extends DefaultHandler {
 
     @Override
     public void characters(char ch[], int start, int length) {
-        logi("CHAR=" + new String(ch));
+        // logi("CHAR=" + new String(ch));
+        // FIXME: Try with new String(ch,start,length);
         String chars = "";
         int size = start + length;
         for (int i = start; i < size; i++) {
-            // Log.v(TAG, "CHAR=" + ch[i]);
             switch (ch[i]) {
                 case '\\':
                     chars += "\\\\";
@@ -91,22 +94,9 @@ public class XmlHandler extends DefaultHandler {
                     chars += "\\\"";
                     break;
                 case '\n':
-                    // chars += "\\n";
-                    break;
                 case '\r':
-                    // chars += "\\r";
-                    break;
                 case '\t':
                     // chars += "\\t";
-                    break;
-                case '<':
-                    chars += "&lt;";
-                    break;
-                case '>':
-                    chars += "&gt;";
-                    break;
-                case '&':
-                    chars += "&amp;";
                     break;
                 default:
                     chars += "" + ch[i];
@@ -117,6 +107,23 @@ public class XmlHandler extends DefaultHandler {
             logi("CHAR=" + chars);
             currentNode.content = chars;
         }
+    }
 
+    @Override
+    public void error(SAXParseException e) throws SAXException {
+        Log.e(TAG, e.getMessage());
+        super.error(e);
+    }
+
+    @Override
+    public void fatalError(SAXParseException e) throws SAXException {
+        Log.e(TAG, e.getMessage());
+        super.fatalError(e);
+    }
+
+    @Override
+    public void warning(SAXParseException e) throws SAXException {
+        Log.e(TAG, e.getMessage());
+        super.warning(e);
     }
 }

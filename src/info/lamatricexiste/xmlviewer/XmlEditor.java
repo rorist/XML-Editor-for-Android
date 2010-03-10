@@ -3,6 +3,7 @@
  * ------
  * http://www.saxproject.org/
  * http://www.anddev.org/parsing_xml_from_the_net_-_using_the_saxparser-t353.html 
+ * http://www.saxproject.org/?selected=get-set
  */
 
 package info.lamatricexiste.xmlviewer;
@@ -19,11 +20,8 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.http.ParseException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
-
-import org.xmlpull.v1.XmlPullParser;
-import android.util.AttributeSet;
-import android.util.Xml;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -32,15 +30,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class XmlEditor extends Activity {
 
@@ -70,6 +64,31 @@ public class XmlEditor extends Activity {
             finish();
         }
 
+        setButtons();
+    }
+
+    private Node parseXml() throws SAXException, ParserConfigurationException, IOException,
+            ParseException {
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        SAXParser sp = spf.newSAXParser();
+        XMLReader xr = sp.getXMLReader();
+        XmlHandler handler = new XmlHandler();
+        FileReader r = new FileReader(file);
+
+        // Set XML Handler
+        xr.setContentHandler(handler);
+        xr.setErrorHandler(handler);
+        try {
+            xr.setFeature("http://xml.org/sax/features/validation", true);
+        } catch (SAXNotSupportedException e) {
+            Log.i(TAG, "Validation schema not found!");
+        }
+        xr.parse(new InputSource(r));
+        // Log.i(TAG, "rootNode="+rootNode.childs.size());
+        return handler.getRootNode();
+    }
+    
+    private void setButtons(){
         // Set buttons action
         Button btn_root = (Button) findViewById(R.id.btn_root);
         btn_root.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +107,7 @@ public class XmlEditor extends Activity {
         Button btn_prev = (Button) findViewById(R.id.btn_prev);
         btn_prev.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(currentNode.parentNode!=null && currentNode.position > 0){
+                if (currentNode.parentNode != null && currentNode.position > 0) {
                     displayNode(currentNode.parentNode.childs.get(currentNode.position - 1));
                 }
             }
@@ -96,20 +115,21 @@ public class XmlEditor extends Activity {
         Button btn_next = (Button) findViewById(R.id.btn_next);
         btn_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(currentNode.parentNode!=null && currentNode.position < currentNode.parentNode.childs.size() - 1){
+                if (currentNode.parentNode != null
+                        && currentNode.position < currentNode.parentNode.childs.size() - 1) {
                     displayNode(currentNode.parentNode.childs.get(currentNode.position + 1));
                 }
             }
         });
     }
 
-    private TextView createTitle(String value){
+    private TextView createTitle(String value) {
         TextView title = (TextView) mInflater.inflate(R.layout.list_title, null);
         title.setText(value);
         return title;
     }
 
-    private TableLayout createContainer(){
+    private TableLayout createContainer() {
         TableLayout container = (TableLayout) mInflater.inflate(R.layout.list_table, null);
         return container;
     }
@@ -123,7 +143,7 @@ public class XmlEditor extends Activity {
         // Node information
         mainView.addView(createTitle("Node:"));
         TableLayout layout_info = createContainer();
-        layout_info.addView(createInfoTextView("Name", node.name));
+        layout_info.addView(createInfoTextView("Name (" + node.position + ")", node.name));
         if (node.content != null) {
             layout_info.addView(createInfoTextView("Content", node.content));
         }
@@ -190,18 +210,5 @@ public class XmlEditor extends Activity {
                 finish();
             }
         }
-    }
-
-    private Node parseXml() throws SAXException, ParserConfigurationException, IOException, ParseException {
-        SAXParserFactory spf = SAXParserFactory.newInstance();
-        SAXParser sp = spf.newSAXParser();
-        XMLReader xr = sp.getXMLReader();
-        XmlHandler handler = new XmlHandler();
-        FileReader r = new FileReader(file);
-        xr.setContentHandler(handler);
-        xr.setErrorHandler(handler);
-        xr.parse(new InputSource(r));
-        // Log.i(TAG, "rootNode="+rootNode.childs.size());
-        return handler.getRootNode();
     }
 }
